@@ -49,7 +49,14 @@ class MealController extends Controller
         ]);
 
         $meal->symptoms()->attach([
-
+            'energized' => 'energized',
+            'tired' => 'tired',
+            'nausea' => 'nausea',
+            'bloated' => 'bloated',
+            'constipation' => 'constipation',
+            'cramps' => 'cramps',
+            'satiated' => 'satiated',
+            'gassy' => 'gassy',
         ]);
     
         return redirect('/meals');

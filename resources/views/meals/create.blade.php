@@ -43,8 +43,8 @@
     <div class="pt-0 col-span-full">
     @foreach ($symptoms as $symptom)
     <div class="col-span-1">
-        <input type="checkbox" name="symptoms[]" value="{{ $symptom->name}}" id="$symptom->name}}">
-        <label for="{{$symptom->name}}" class="text-sm font-medium leading-6 text-gray-900">{{$symptom->name}}</label>
+        <input type="checkbox" name="symptoms[]" value="{{ $symptom->name }}" id="{{ $symptom->name }}">
+        <label for="{{ $symptom->name }}" class="text-sm font-medium leading-6 text-gray-900">{{ ucfirst($symptom->name) }}</label>
     </div>
      @endforeach
     

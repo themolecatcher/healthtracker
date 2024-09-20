@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Health Coaching Home Page</title>
+        <title>Health Tracker</title>
         <script src="https://cdn.tailwindcss.com"></script>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -18,7 +18,7 @@
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <img class="h-8 w-8" src="{{ asset('/img/logo.jpg') }}" alt="Hannah Roan Coaching Logo">
+            <img class="h-8 w-8" src="{{ asset('/img/logo.svg') }}" alt="Hannah Roan Coaching Logo">
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
