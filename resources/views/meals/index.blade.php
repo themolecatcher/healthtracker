@@ -14,9 +14,13 @@
                 <br>
                 <strong>Ingredients: </strong> {{ $meal->ingredients }}
                 <br>
-                @foreach ($symptoms as $symptom)
-                <strong>Symptoms: </strong>{{ $symptom->name}}
-                @endforeach
+                <p> <strong>Symptoms: </strong> 
+                 @if($meal->symptoms->isNotEmpty())
+        {{ implode(', ', $meal->symptoms->pluck('name')->toArray()) }}
+    @else
+        No symptoms selected
+    @endif</p>
+  
             </div>
             
         </a>

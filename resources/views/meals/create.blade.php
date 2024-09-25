@@ -43,26 +43,10 @@
     <div class="pt-0 col-span-full">
     @foreach ($symptoms as $symptom)
     <div class="col-span-1">
-        <input type="checkbox" name="symptoms[]" value="{{ $symptom->name }}" id="{{ $symptom->name }}">
-        <label for="{{ $symptom->name }}" class="text-sm font-medium leading-6 text-gray-900">{{ ucfirst($symptom->name) }}</label>
+        <input type="checkbox" name="symptoms[]" value="{{ $symptom->id }}" id="symptom-{{ $symptom->id }}">
+        <label for="symptom-{{ $symptom->id }}" class="text-sm font-medium leading-6 text-gray-900">{{ ucfirst($symptom->name) }}</label>
     </div>
-     @endforeach
-    
-    <!-- <div class="col-span-1">
-        <input type="checkbox" name="symptoms[]" value="tired" id="tired" >
-        <label for="tired" class="text-sm font-medium leading-6 text-gray-900">Tired</label>
-    </div>
-    <div class="col-span-1">
-        <input type="checkbox" name="symptoms[]" value="cramps" id="cramps">
-        <label for="energized" class="text-sm font-medium leading-6 text-gray-900">Cramps</label>
-    </div>
-    <div class="col-span-1">
-        <input type="checkbox" name="symptoms[]" value="nausea" id="nausea">
-        <label for="energized" class="text-sm font-medium leading-6 text-gray-900">Nausea</label>
-    </div>
-    <div class="col-span-1">
-        <input type="checkbox" name="symptoms[]" value="nosymptoms" id="nosymptoms">
-        <label for="energized" class="text-sm font-medium leading-6 text-gray-900">No symptoms</label> -->
+@endforeach
  </x-form-field>
     
 </div>

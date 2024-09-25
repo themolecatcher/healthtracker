@@ -9,7 +9,7 @@ use App\Models\Symptom;
 class MealController extends Controller
 {
     public function index() {
-            $meals = Meal::with('symptoms')->paginate(3);
+            $meals = Meal::with('symptoms')->simplePaginate(3);
             $symptoms = Symptom::all();
         
             return view('meals.index', [
@@ -40,7 +40,7 @@ class MealController extends Controller
             'title' => ['required', 'min:3', 'max:100'],
             'date' => ['required', 'date'],
             'ingredients' => ['required', 'min:5','max:255'],
-            'symptoms' => ['nullable'],
+            'symptoms' => ['nullable', 'array'],
         ]);
         $meal = Meal::create([
             'title' => request('title'),
@@ -48,16 +48,9 @@ class MealController extends Controller
             'ingredients' => request('ingredients'),
         ]);
 
-        $meal->symptoms()->attach([
-            'energized' => 'energized',
-            'tired' => 'tired',
-            'nausea' => 'nausea',
-            'bloated' => 'bloated',
-            'constipation' => 'constipation',
-            'cramps' => 'cramps',
-            'satiated' => 'satiated',
-            'gassy' => 'gassy',
-        ]);
+        if ($request->input('symptoms')) {
+            $meal->symptoms()->attach($request->input('symptoms')); // attach symptoms to the meal
+        }
     
         return redirect('/meals');
     }
@@ -71,7 +64,7 @@ class MealController extends Controller
             'title' => ['required', 'min:3', 'max:100'],
             'date' => ['required', 'date'],
             'ingredients' => ['required', 'min:5','max:255'],
-            'symptoms' => ['nullable'],
+            'symptoms' => ['nullable', 'array'],
         ]);
         
         $meal->update([
@@ -79,7 +72,9 @@ class MealController extends Controller
             'date' => request('date'),
             'ingredients' => request('ingredients'),
         ]);
-    
+
+        $meal->symptoms()->sync($request->input('symptoms', []));
+
        return redirect('/meals/' . $meal->id);
 
     }
