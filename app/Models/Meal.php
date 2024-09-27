@@ -9,9 +9,13 @@ class Meal extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['symptoms'];
+    protected $guarded = [];
 
     public function symptoms() {
         return $this->belongsToMany(Symptom::class);
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 }

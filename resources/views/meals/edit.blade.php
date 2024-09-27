@@ -7,90 +7,56 @@
     @csrf
     @method('PATCH')
 
-  <div class="space-y-12">
+ 
+    <div class="space-y-12">
     <div class="border-b border-gray-900/10 pb-12">
       <h2 class="text-base font-semibold leading-7 text-gray-900">Today's meals</h2>
 
       <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-4">
-          <label for="title" class="block text-m font-medium leading-6 text-gray-900">Title</label>
+        <x-form-field>
+         <x-form-label for="title">Title</x-form-label>
           <div class="mt-2">
-            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-              <input type="text" 
-              name="title" id="title" 
-              autocomplete="title" 
-              class="block flex-1 rounded-md border-0 py-1.5 pl-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" 
-              placeholder="f.e. Oatmeal with protein powder"
-              value="{{ $meal->title }}" 
-              required>
+           <x-form-input type="text" name="title" id="title" :value="$meal->title" required/>
+            <x-form-error name="title"/>
+        </x-form-field>
+        </div>
+
+        <x-form-field>
+            <x-form-label for="date">Date and time</x-form-label>
+            <div>
+                <x-form-input type="datetime-local" name="date" id="date" :value="$meal->date" required/>
             </div>
-            @error('title')
-            <p class="col-span-full flex p-1 mt-1 text-sm font-bold text-red-800 rounded-lg dark:text-red-400">{{ $message }}</p>
-            @enderror
-          </div>
-        </div>
+            <x-form-error name="date"/>
+        </x-form-field>
 
-        <div class="col-span-full">
-        <label for="date" class="block text-m font-medium leading-6 text-gray-900">Date and time</label>
-        <div>
-            <input type="datetime-local" 
-            name="date" id="date" 
-            class="block flex-1 rounded-md border-0 py-1.5 pl-1 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-0 sm:text-sm sm:leading-6" 
-            value="{{ $meal->date }}" 
-            required>
-        </div>
-        @error('date')
-            <p class="col-span-full flex p-1 mt-1 text-sm font-bold text-red-800 rounded-lg dark:text-red-400" role="alert">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <div class="col-span-full">
-          <label for="ingredients" class="block text-m font-medium leading-6 text-gray-900">Ingredients</label>
+        <x-form-field>
+          <x-form-label for="ingredients">Ingredients</x-form-label>
           <div class="mt-2">
-            <textarea 
-            style="resize:none" 
-            id="ingredients" 
-            name="ingredients" 
-            rows="3" 
-            class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
-            required>{{ $meal->ingredients }}</textarea>
+            <textarea style="resize:none" id="ingredients" name="ingredients" rows="3" class="block w-full rounded-md border-0 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" required>{{ old('ingredients', $meal->ingredients) }}</textarea>
           </div>
-          @error('ingredients')
-            <p class="col-span-full flex p-1 mt-1 text-sm font-bold text-red-800 rounded-lg dark:text-red-400" role="alert">{{ $message }}</p>
-            @enderror
-        </div>
+          <x-form-error name="ingredients"/>
+        </x-form-field>
 
 
-<div class="pb-0 col-span-full">
+<x-form-field>
     <p class="pb-0 block text-m font-medium leading-6 text-gray-900">Symptoms</p>
 </div>        
 <div class="pt-0">
-    <div class="pt-0 col-span-1">
-        <input type="checkbox" name="symptoms[]" value="energized" id="energized">
-        <label for="energized" class="text-sm font-medium leading-6 text-gray-900">Energized</label>
-    </div>
-    <div class="col-span-1">
-        <input type="checkbox" name="symptoms[]" value="tired" id="tired">
-        <label for="tired" class="text-sm font-medium leading-6 text-gray-900">Tired</label>
-    </div>
-    <div class="col-span-1">
-        <input type="checkbox" name="symptoms[]" value="cramps" id="cramps">
-        <label for="energized" class="text-sm font-medium leading-6 text-gray-900">Cramps</label>
-    </div>
-    <div class="col-span-1">
-        <input type="checkbox" name="symptoms[]" value="nausea" id="nausea">
-        <label for="energized" class="text-sm font-medium leading-6 text-gray-900">Nausea</label>
-    </div>
-    <div class="col-span-1">
-        <input type="checkbox" name="symptoms[]" value="nosymptoms" id="nosymptoms">
-        <label for="energized" class="text-sm font-medium leading-6 text-gray-900">No symptoms</label>
-    </div>
+    <div class="pt-0 col-span-full">
+    @foreach ($symptoms as $symptom)
+            <div class="col-span-1">
+                <input type="checkbox" name="symptoms[]" value="{{ $symptom->id }}" id="symptom-{{ $symptom->id }}"
+                    {{ in_array($symptom->id, old('symptoms', $meal->symptoms->pluck('id')->toArray())) ? 'checked' : '' }}>
+                <label for="symptom-{{ $symptom->id }}" class="text-sm font-medium leading-6 text-gray-900">
+                    {{ ucfirst($symptom->name) }}
+                </label>
+            </div>
+        @endforeach
+ </x-form-field>
     
 </div>
-
-
-        <div class="col-span-full">
-          <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Photos of your meal (optional) </label>
+    <x-form-field>
+          <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Photos of your meal (optional)</label>
           <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
             <div class="text-center">
               <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -108,7 +74,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </x-form-field>
 
   <div class="mt-6 flex items-center justify-between gap-x-6">
     <div class="flex items-center">

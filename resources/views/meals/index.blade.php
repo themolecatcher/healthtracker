@@ -10,7 +10,7 @@
             <div>
                 <strong>Meal title: </strong>  {{ $meal->title }}
                 <br>
-                <strong>Date: </strong> {{ $meal->date}} 
+                <p><strong>Date: </strong> {{ \Carbon\Carbon::parse($meal->date)->format('F jS, H:i') }}</p>
                 <br>
                 <strong>Ingredients: </strong> {{ $meal->ingredients }}
                 <br>
