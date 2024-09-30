@@ -35,21 +35,33 @@
           <x-form-error name="ingredients"/>
         </x-form-field>
 
+        <div class="col-span-full flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8">
+            
+            {{-- Symptoms Section --}}
+            <x-form-field class="flex-1">
+                <p class="block text-m font-medium leading-6 text-gray-900">Symptoms</p>
+                <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    @foreach ($symptoms as $symptom)
+                    <div class="col-span-1">
+                        <input type="checkbox" name="symptoms[]" value="{{ $symptom->id }}" id="symptom-{{ $symptom->id }}">
+                        <label for="symptom-{{ $symptom->id }}" class="text-sm font-medium leading-6 text-gray-900">{{ ucfirst($symptom->name) }}</label>
+                    </div>
+                    @endforeach
+                </div>
+            </x-form-field>
 
-<x-form-field>
-    <p class="pb-0 block text-m font-medium leading-6 text-gray-900">Symptoms</p>
-</div>        
-<div class="pt-0">
-    <div class="pt-0 col-span-full">
-    @foreach ($symptoms as $symptom)
-    <div class="col-span-1">
-        <input type="checkbox" name="symptoms[]" value="{{ $symptom->id }}" id="symptom-{{ $symptom->id }}">
-        <label for="symptom-{{ $symptom->id }}" class="text-sm font-medium leading-6 text-gray-900">{{ ucfirst($symptom->name) }}</label>
-    </div>
-@endforeach
- </x-form-field>
-    
-</div>
+            <x-form-field class="flex-1">
+                <p class="block text-m font-medium leading-6 text-gray-900">Allergens</p>
+                <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    @foreach ($allergens as $allergen)
+                    <div class="col-span-1">
+                        <input type="checkbox" name="allergens[]" value="{{ $allergen->id }}" id="allergen-{{ $allergen->id }}">
+                        <label for="allergen-{{ $allergen->id }}" class="text-sm font-medium leading-6 text-gray-900">{{ ucfirst($allergen->name) }}</label>
+                    </div>
+                    @endforeach
+                </div>
+            </x-form-field>
+
     <x-form-field>
           <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Photos of your meal (optional)</label>
           <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">

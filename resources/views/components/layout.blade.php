@@ -1,121 +1,146 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-100">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>The Gut Guardian</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="/css/styles.css">
-    </head>
-    <body class="h-full">
+    <title>The Gut Guardian</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="h-full">
 
-<div class="min-h-full">
-  <nav class="bg-emerald-900">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-16 items-center justify-between">
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <img class="h-8 w-8" src="{{ asset('/img/logo.svg') }}" alt="Hannah Roan Coaching Logo">
-          </div>
-          <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-4">
-              <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-              <x-nav-link href="/resources" :active="request()->is('resources')" >Resources</x-nav-link>
-              <x-nav-link href="/meals" :active="request()->is('meals')">Meals</x-nav-link>
-              <x-nav-link href="/contact" :active="request()->is('contact')" type="a" >Contact</x-nav-link>
-            </div>
-          </div>
+<div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <div class="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
+        <div class="flex items-center justify-center h-14 border-b">
+            <div class="text-lg font-bold">The Gut Guardian</div>
         </div>
-        <div class="hidden md:block">
-          <div class="ml-4 flex items-center md:ml-6">
-          @guest
-            <x-nav-link href="/login" :active="request()->is('login')" type="a">Log in</x-nav-link>
-            <x-nav-link href="/register" :active="request()->is('register')" type="a">Register</x-nav-link>
-            @endguest
-            <!-- Profile dropdown -->
-            <div class="relative ml-3">
-              <div>
-                @auth
-                <div class="ml-4 flex items-center md:ml-6">
-                  <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 mr-3" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                    <span class="absolute -inset-1.5"></span>
-                    <span class="sr-only">Open user menu</span>
-                    <img class="h-8 w-8 rounded-full" src="{{ asset('/img/icon.jpg') }}" alt="">
-                  </button>
-                  <form method="POST" action="/logout">
-                    @csrf
-                    <x-form-button class="bg-emerald-950 text-white hover:bg-emerald-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium text-white">Log out</x-form-button>
-                  </form>
-              </div>
+        <div class="overflow-y-auto overflow-x-hidden flex-grow">
+            <ul class="flex flex-col py-4 space-y-1">
+                <li class="px-5">
+                    <div class="flex flex-row items-center h-8">
+                        <div class="text-sm font-light tracking-wide text-gray-500">Menu</div>
+                    </div>
+                </li>
+                
+                <!-- Home Link -->
+                <li>
+                    <x-nav-link href="/" :active="request()->is('/')">
+                        <x-slot:icon>
+                          <img src="{{ asset('img/dashboard-icon.png') }}" alt="icon of a hand holding a gear" class="w-7 h-7">
+                        </x-slot:icon>
+                        Dashboard
+                    </x-nav-link>
+                </li>
+
+                <!-- Meals Link -->
+                 @auth
+                <li>
+                    <x-nav-link href="/meals" :active="request()->is('meals')">
+                    <x-slot:icon>
+                          <img src="{{ asset('img/meal-icon.png') }}" alt="icon of a hand holding a gear" class="w-7 h-7">
+                        </x-slot:icon>
+                        Meals
+                    </x-nav-link>
+                </li>
+
+                <!-- Add Meal Link -->
+                <li>
+                    <x-nav-link href="/meals/create" :active="request()->is('meals/create')">
+                        <x-slot:icon>
+                          <img src="{{ asset('img/plus-icon.png') }}" alt="icon of a fork, plate and spoon" class="w-7 h-7">
+                        </x-slot:icon>
+                        Add a meal
+                    </x-nav-link>
+                </li>
                 @endauth
-              </div>
+                     <!-- Resources Link -->
+                <li>
+                    <x-nav-link href="/resources" :active="request()->is('resources')">
+                        <x-slot:icon>
+                          <img src="{{ asset('img/resources-icon.png') }}" alt="icon of a hand holding a gear" class="w-7 h-7">
+                        </x-slot:icon>
+                        Resources
+                    </x-nav-link>
+                </li>
+
+                <!-- Login/Register Links -->
+                @guest
+                <li>
+                    <x-nav-link href="/login" :active="request()->is('login')">
+                    <x-slot:icon>
+                          <img src="{{ asset('img/login-icon.png') }}" alt="icon of a hand holding a gear" class="w-7 h-7">
+                    </x-slot:icon>
+                        Log in
+                    </x-nav-link>
+                </li>
+                <li>
+                    <x-nav-link href="/register" :active="request()->is('register')">
+                    <x-slot:icon>
+                          <img src="{{ asset('img/register-icon.png') }}" alt="icon of a hand holding a gear" class="w-7 h-7">
+                        </x-slot:icon>
+                        Register
+                    </x-nav-link>
+                </li>
+                @endguest
+                
+              
+                <!-- Logout Link -->
+                @auth
+                <li class="px-5">
+          <div class="flex flex-row items-center h-8">
+            <div class="text-sm font-light tracking-wide text-gray-500">Settings</div>
+          </div>
+        </li>
+        <li>
+          <x-nav-link href="#">
+                  <x-slot:icon>
+                     <img src="{{ asset('img/profile-icon.png') }}" alt="icon of a man depicting the profile section of the website" class="w-7 h-7">
+                  </x-slot:icon>
+                        Profile
+          </x-nav-link>
+        </li>
+        <li>
+        <x-nav-link href="#">
+                  <x-slot:icon>
+                     <img src="{{ asset('img/settings-icon.png') }}" alt="a gear icon depicting the settings on the website" class="w-7 h-7">
+                  </x-slot:icon>
+                        Settings
+          </x-nav-link>
+        </li>
+                <li>
+                    <form method="POST" action="/logout" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
+                        @csrf
+                        <x-form-button class="ml-2 text-sm tracking-wide truncate">Logout</x-form-button>
+                    </form>
+                </li>
+                @endauth
+            </ul>
+        </div>
+    </div>
+
+    
+    <div class="ml-64 flex-grow">
+        <header class="bg-white shadow">
+            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 sm:flex sm:justify-between">
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
+                @auth
+                <x-button href="/meals/create">+ Add meal</x-button>
+                @endauth
             </div>
-          </div>
-        </div>
-        <div class="-mr-2 flex md:hidden">
-          <!-- Mobile menu button -->
-          <button type="button" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false">
-            <span class="absolute -inset-0.5"></span>
-            <span class="sr-only">Open main menu</span>
-            <!-- Menu open: "hidden", Menu closed: "block" -->
-            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-            <!-- Menu open: "block", Menu closed: "hidden" -->
-            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-      </div>
+        </header>
+        
+        <main>
+            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                {{ $slot }}
+            </div>
+        </main>
     </div>
-
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="md:hidden" id="mobile-menu">
-      <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="/" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Home</a>
-        <a href="/resources" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Resources</a>
-        <a href="/meals" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Meals</a>
-        <a href="/contact" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact</a>
-      </div>
-      <div class="border-t border-gray-700 pb-3 pt-4">
-        <div class="flex items-center px-5">
-          <div class="flex-shrink-0">
-            <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-          </div>
-          <div class="ml-3">
-            <div class="text-base font-medium leading-none text-white">Valesca Plett</div>
-            <div class="text-sm font-medium leading-none text-gray-400">valescaplett@gmail.com</div>
-          </div>
-          <button type="button" class="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-            <span class="absolute -inset-1.5"></span>
-            <span class="sr-only">View notifications</span>
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <header class="bg-white shadow">
-    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 sm:flex sm:justify-between">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
-      <x-button href="/meals/create">+ Add meal</x-button>
-    </div>
-  </header>
-  <main>
-    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      {{ $slot }}
-    </div>
-  </main>
 </div>
 
-    </body>
+</body>
 </html>
