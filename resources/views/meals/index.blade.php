@@ -10,13 +10,17 @@
             <div>
                 <strong>Meal title: </strong>  {{ $meal->title }}
                 <br>
-                <strong>Date: </strong> {{ $meal->date}} 
+                <p><strong>Date: </strong> {{ \Carbon\Carbon::parse($meal->date)->format('F jS, H:i') }}</p>
                 <br>
                 <strong>Ingredients: </strong> {{ $meal->ingredients }}
                 <br>
-                @foreach ($symptoms as $symptom)
-                <strong>Symptoms: </strong>{{ $symptom->name}}
-                @endforeach
+                <p> <strong>Symptoms: </strong> 
+                 @if($meal->symptoms->isNotEmpty())
+        {{ implode(', ', $meal->symptoms->pluck('name')->toArray()) }}
+    @else
+        No symptoms selected
+    @endif</p>
+  
             </div>
             
         </a>

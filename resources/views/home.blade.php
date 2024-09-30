@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:heading>
-        Home
+        Dashboard
     </x-slot:heading>  
 
 </x-layout>
