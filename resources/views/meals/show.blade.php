@@ -7,6 +7,7 @@
 <h3>Date: {{ \Carbon\Carbon::parse($meal->date)->format('F jS, H:i') }}</h3>
 <h3>Ingredients: {{ $meal->ingredients }}</h3>
 <h3>Symptoms: {{ implode(', ', $meal->symptoms->pluck('name')->toArray()) }}</h3>
+<h3>Allergens: {{ implode(', ', $meal->allergens->pluck('name')->toArray()) }}</h3>
 
 @can('edit', $meal)
     <p class="mt-6">

@@ -4,10 +4,14 @@ use App\Http\Controllers\MealController;
 use App\Http\Controllers\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionController;
+use App\Jobs\TranslateMeal;
 use App\Mail\MealAdded;
+use App\Models\Meal;
 
 Route::get('test', function() {
-
+    $meal = Meal::first();
+    TranslateMeal::dispatch($meal);
+    return 'Done';
 });
 
 Route::view('/', 'home');

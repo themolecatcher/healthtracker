@@ -8,25 +8,29 @@
         <a href="/meals/{{$meal['id']}}" class="hover:underline block px-4 py-6 border border-gray-200 rounded-lg">
 
             <div>
-                <strong>Meal title: </strong>  {{ $meal->title }}
-                <br>
+                <p><strong>Meal title: </strong>  {{ $meal->title }}</p>
                 <p><strong>Date: </strong> {{ \Carbon\Carbon::parse($meal->date)->format('F jS, H:i') }}</p>
-                <br>
-                <strong>Ingredients: </strong> {{ $meal->ingredients }}
-                <br>
+                <p><strong>Ingredients: </strong> {{ $meal->ingredients }}</p>
                 <p> <strong>Symptoms: </strong> 
                  @if($meal->symptoms->isNotEmpty())
-        {{ implode(', ', $meal->symptoms->pluck('name')->toArray()) }}
-    @else
-        No symptoms selected
-    @endif</p>
-  
+                     {{ implode(', ', $meal->symptoms->pluck('name')->toArray()) }}
+                @else
+                     No symptoms selected
+                @endif</p>
+
+                <p> <strong>Allergens: </strong> 
+                 @if($meal->allergens->isNotEmpty())
+                     {{ implode(', ', $meal->allergens->pluck('name')->toArray()) }}
+                @else
+                     No allergens selected
+                @endif</p>
             </div>
             
         </a>
 @endforeach  
-
+    <div class="mt-10">
+                {{ $meals->links() }}
+    </div>
 </div>   
-
 
 </x-layout>
