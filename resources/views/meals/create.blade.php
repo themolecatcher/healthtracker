@@ -35,12 +35,12 @@
           <x-form-error name="ingredients"/>
         </x-form-field>
 
-        <div class="col-span-full flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8">
+        <div class="col-span-full flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-40 justify-stretch">
             
             {{-- Symptoms Section --}}
             <x-form-field class="flex-1">
                 <p class="block text-m font-medium leading-6 text-gray-900">Symptoms</p>
-                <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
                     @foreach ($symptoms as $symptom)
                     <div class="col-span-1">
                         <input type="checkbox" name="symptoms[]" value="{{ $symptom->id }}" id="symptom-{{ $symptom->id }}">
@@ -52,7 +52,7 @@
 
             <x-form-field class="flex-1">
                 <p class="block text-m font-medium leading-6 text-gray-900">Allergens</p>
-                <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
                     @foreach ($allergens as $allergen)
                     <div class="col-span-1">
                         <input type="checkbox" name="allergens[]" value="{{ $allergen->id }}" id="allergen-{{ $allergen->id }}">
@@ -61,32 +61,21 @@
                     @endforeach
                 </div>
             </x-form-field>
+        </div>
 
     <x-form-field>
-          <label for="cover-photo" class="block text-sm font-medium leading-6 text-gray-900">Photos of your meal (optional)</label>
-          <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
             <div class="text-center">
-              <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
-              </svg>
-              <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                <label for="file-upload" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
-                  <span>Upload a photo</span>
-                  <input id="file-upload" name="file-upload" type="file" class="sr-only">
-                </label>
-                <p class="pl-1">or drag and drop</p>
-              </div>
-              <p class="text-xs leading-5 text-gray-600">PNG, JPG or GIF up to 10MB</p>
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+              <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+              <x-form-button>Save</x-form-button>
             </div>
+              </x-form-field>
           </div>
         </div>
       </div>
-    </x-form-field>
+    
 
-  <div class="mt-6 flex items-center justify-end gap-x-6">
-    <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
-    <x-form-button>Save</x-form-button>
-  </div>
+  
 </form>
 
 </x-layout>

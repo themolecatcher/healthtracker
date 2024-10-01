@@ -7,7 +7,7 @@
     @csrf
     @method('PATCH')
 
- 
+
     <div class="space-y-12">
     <div class="border-b border-gray-900/10 pb-12">
       <h2 class="text-base font-semibold leading-7 text-gray-900">Today's meals</h2>
@@ -37,22 +37,35 @@
           <x-form-error name="ingredients"/>
         </x-form-field>
 
+<div class="col-span-full flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-40 justify-stretch">
 
-<x-form-field>
-    <p class="pb-0 block text-m font-medium leading-6 text-gray-900">Symptoms</p>
-</div>        
-<div class="pt-0">
-    <div class="pt-0 col-span-full">
-    @foreach ($symptoms as $symptom)
-            <div class="col-span-1">
-                <input type="checkbox" name="symptoms[]" value="{{ $symptom->id }}" id="symptom-{{ $symptom->id }}"
-                    {{ in_array($symptom->id, old('symptoms', $meal->symptoms->pluck('id')->toArray())) ? 'checked' : '' }}>
-                <label for="symptom-{{ $symptom->id }}" class="text-sm font-medium leading-6 text-gray-900">
-                    {{ ucfirst($symptom->name) }}
-                </label>
-            </div>
-        @endforeach
- </x-form-field>
+  <x-form-field class="flex-1">
+    <p class="block text-m font-medium leading-6 text-gray-900">Symptoms</p>       
+    <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
+      @foreach ($symptoms as $symptom)
+              <div class="col-span-1">
+                  <input type="checkbox" name="symptoms[]" value="{{ $symptom->id }}" id="symptom-{{ $symptom->id }}"
+                      {{ in_array($symptom->id, old('symptoms', $meal->symptoms->pluck('id')->toArray())) ? 'checked' : '' }}>
+                  <label for="symptom-{{ $symptom->id }}" class="text-sm font-medium leading-6 text-gray-900">
+                      {{ ucfirst($symptom->name) }}
+                  </label>
+              </div>
+          @endforeach
+    </div>
+  </x-form-field>
+
+  <x-form-field class="flex-1">
+                  <p class="block text-m font-medium leading-6 text-gray-900">Allergens</p>
+                  <div class="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      @foreach ($allergens as $allergen)
+                      <div class="col-span-1">
+                          <input type="checkbox" name="allergens[]" value="{{ $allergen->id }}" id="allergen-{{ $allergen->id }}" {{ in_array($allergen->id, old('allergens', $meal->allergens->pluck('id')->toArray())) ? 'checked' : '' }}>
+                          <label for="allergen-{{ $allergen->id }}" class="text-sm font-medium leading-6 text-gray-900">{{ ucfirst($allergen->name) }}</label>
+                      </div>
+                      @endforeach
+                  </div>
+  </x-form-field>
+</div>
     
 </div>
     <x-form-field>
@@ -94,3 +107,17 @@
     @method('DELETE')
 </form>
 </x-layout>
+
+
+
+
+    <x-form-field>
+            <div class="text-center">
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+              <button type="button" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+              <x-form-button>Save</x-form-button>
+            </div>
+              </x-form-field>
+          </div>
+        </div>
+      </div>

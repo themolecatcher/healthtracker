@@ -1,7 +1,7 @@
 @props(['active' => false, 'type' => 'a'])
 
 @if ($type === 'a')
-    <a class="{{ $active ? 'bg-gray-900 text-white border-indigo-500' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-800 hover:border-indigo-500' }} relative flex flex-row items-center h-11 focus:outline-none border-l-4 pr-6"
+    <a class="{{ $active ? 'bg-gray-900 text-white border-teal-800' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-800 border-transparent hover:border-teal-800' }} relative flex flex-row items-center h-11 focus:outline-none border-l-4 pr-6"
        aria-current="{{ $active ? 'page' : 'false' }}"
        {{ $attributes }}>
         <span class="inline-flex justify-center items-center ml-4">
@@ -11,7 +11,7 @@
     </a>
 
 @else
-    <button class="{{ $active ? 'bg-gray-900 text-white border-indigo-500' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-800 border-transparent' }} relative flex flex-row items-center h-11 focus:outline-none border-l-4 pr-6"
+    <button class="{{ $active ? 'bg-gray-900 text-white border-teal-800' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-800 border-transparent hover:border-teal-800' }} relative flex flex-row items-center h-11 focus:outline-none border-l-4 pr-6"
        aria-current="{{ $active ? 'page' : 'false' }}"
        {{ $attributes }}>
         <span class="inline-flex justify-center items-center ml-4">

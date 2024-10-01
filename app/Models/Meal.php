@@ -15,6 +15,10 @@ class Meal extends Model
         return $this->belongsToMany(Symptom::class);
     }
 
+    public function allergens() {
+        return $this->belongsToMany(Allergen::class);
+    }
+
     public function user() {
         return $this->belongsTo(User::class);
     }
