@@ -6,19 +6,19 @@
 
     <title>The Gut Guardian</title>
     @vite(['resources/js/app.js'])
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 </head>
 <body class="h-full">
+
 
 <div class="min-h-screen flex">
     <!-- Sidebar -->
     <div class="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
         <div class="flex items-center justify-center h-14 border-b">
             <div class="text-lg font-bold">The Gut Guardian</div>
+            <img src="" alt="">
         </div>
         <div class="overflow-y-auto overflow-x-hidden flex-grow">
+          <nav>
             <ul class="flex flex-col py-4 space-y-1">
                 <li class="px-5">
                     <div class="flex flex-row items-center h-8">
@@ -119,14 +119,15 @@
                 </li>
                 @endauth
             </ul>
+            </nav>
         </div>
     </div>
 
     
     <div class="ml-64 flex-grow">
-        <header class="bg-white shadow">
-            <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 sm:flex sm:justify-between">
-                <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
+        <header class="bg-white shadow h-14 border-b">
+            <div class="mx-auto max-w-7xl px-4 py-6 justify-center sm:px-6 lg:px-8 sm:flex sm:justify-between">
+                <h1 class="text-2xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
                 @auth
                 <x-button href="/meals/create">+ Add meal</x-button>
                 @endauth

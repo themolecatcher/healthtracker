@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout >
     <x-slot:heading>
         Dashboard
     </x-slot:heading>  
